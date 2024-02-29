@@ -1,13 +1,17 @@
 import os
 
+from diary import handle_diary
+from plant import handle_grow
+from user import check_and_save_user
 
-def check_handle_message(json_data, line_bot_api, msg_filename='msgs.pkl'):
-    tk = json_data['events'][0]['replyToken']
-    if json_data['events'][0]['type'] == 'postback':
-        text = json_data['events'][0]['postback']['data']
-    elif json_data['events'][0]['type'] == 'message':
-        text = json_data['events'][0]['message']['text']
-    userID = json_data['events'][0]['source']['userId']
+
+def check_handle_message(event, line_bot_api, msg_filename='msgs.pkl'):
+    tk = event.reply_token
+    if event.type == 'postback':
+        text = event.postback.data
+    elif event.type == 'message':
+        text = event.message.text
+    userID = event.source.user_id
 
     # check_and_save_user
     check_and_save_user(userID)
