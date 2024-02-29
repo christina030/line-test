@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+import pickle
 import os
 
 from diary import handle_diary
