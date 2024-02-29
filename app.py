@@ -12,7 +12,6 @@ line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(os.environ['CHANNEL_SECRET'])
 
 shared_folder = './shared'
-diary_mood = ['action=diary&mood=1', 'action=diary&mood=2', 'action=diary&mood=3', 'action=diary&mood=4', 'action=diary&mood=5', 'action=diary&mood=6']
 
 @app.route("/callback", methods=['POST'])
 def callback():
