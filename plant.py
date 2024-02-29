@@ -8,6 +8,8 @@ import datetime
 import cv2
 from linebot.models import TextSendMessage, ImageSendMessage    # 載入 TextSendMessage 和 ImageSendMessage 模組
 
+from imgur import glucose_graph
+
 
 grow_days = [5, 10, 20, 30]
 mood_ranges = [[8, 16], [10, 20], [20, 40], [20, 40]]
