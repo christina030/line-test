@@ -5,7 +5,7 @@ from plant import handle_grow
 from user import check_and_save_user
 
 
-def check_handle_message(event, line_bot_api, msg_filename='msgs.pkl'):
+def check_handle_message(event, line_bot_api, folder, msg_filename='msgs.pkl'):
     tk = event.reply_token
     if event.type == 'postback':
         text = event.postback.data
@@ -14,7 +14,7 @@ def check_handle_message(event, line_bot_api, msg_filename='msgs.pkl'):
     userID = event.source.user_id
 
     # check_and_save_user
-    check_and_save_user(userID)
+    check_and_save_user(userID, folder)
 
     # msgs file
     msgs = None
@@ -26,7 +26,7 @@ def check_handle_message(event, line_bot_api, msg_filename='msgs.pkl'):
         if msgs[userID][0][1] == 'diary':
             if tk != msgs[userID][0][0]:
                 print('Start handle diary!')
-                handle_diary(tk, userID, text, msgs[userID][0][2], line_bot_api)
+                handle_diary(tk, userID, text, msgs[userID][0][2], line_bot_api, folder)
                 print('End handle diary!')
                 del msgs[userID]
 
@@ -40,4 +40,4 @@ def check_handle_message(event, line_bot_api, msg_filename='msgs.pkl'):
             pickle.dump(msgs, f)
 
     elif text == 'change-to-plant':
-        handle_grow(tk, userID, line_bot_api)
+        handle_grow(tk, userID, line_bot_api, folder)
