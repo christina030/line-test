@@ -1,7 +1,7 @@
 import os
 
 
-def handle_message(json_data, line_bot_api, msg_filename='msgs.pkl'):
+def check_handle_message(json_data, line_bot_api, msg_filename='msgs.pkl'):
     tk = json_data['events'][0]['replyToken']
     if json_data['events'][0]['type'] == 'postback':
         text = json_data['events'][0]['postback']['data']
