@@ -8,6 +8,8 @@ from plant import handle_grow
 from user import check_and_save_user
 
 
+diary_mood = ['action=diary&mood=1', 'action=diary&mood=2', 'action=diary&mood=3', 'action=diary&mood=4', 'action=diary&mood=5', 'action=diary&mood=6']
+
 def check_handle_message(event, line_bot_api, folder, msg_filename='msgs.pkl'):
     tk = event.reply_token
     if event.type == 'postback':
