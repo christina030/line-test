@@ -14,34 +14,6 @@ from imgur import glucose_graph
 grow_days = [5, 10, 20, 30]
 mood_ranges = [[8, 16], [10, 20], [20, 40], [20, 40]]
 
-def save_mood(userID, mood, folder, mood_filename='mood_scores.pkl', action_filename='action_done.pkl'):
-    # check if action done
-    action_done = None
-    with open(os.path.join(folder, action_filename), 'rb') as f:
-        action_done = pickle.load(f)
-
-    today = datetime.date.today()
-    if action_done[userID] == today:
-        not_done = False
-    else:
-        action_done[userID] = today
-        with open(os.path.join(folder, action_filename), 'wb') as f:
-            pickle.dump(action_done, f)
-        not_done = True
-
-    # change mood score
-    if not_done:
-        mood_scores = None
-        with open(os.path.join(folder, mood_filename), 'rb') as f:
-            mood_scores = pickle.load(f)
-
-        mood_scores[userID][-1] += (mood + 1)
-        print(userID, '分數：', mood_scores[userID][-1])
-
-        with open(os.path.join(folder, mood_filename), 'wb') as f:
-            pickle.dump(mood_scores, f)
-
-
 def handle_grow(tk, userID, line_bot_api, folder, user_filename='users.pkl', mood_filename='mood_scores.pkl'):
     users = None
     mood_scores = None
