@@ -27,7 +27,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    check_handle_message(event, line_bot_api)
+    check_handle_message(event, line_bot_api, shared_folder)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
