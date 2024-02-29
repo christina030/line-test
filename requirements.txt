@@ -1,5 +1,5 @@
 line-bot-sdk==2.3.0
-flask==2.2.5
+flask==2.2.2
 requests==2.28.0
-Werkzeug==3.0.1
+Werkzeug==2.3.7
 pyimgur==0.6.0
