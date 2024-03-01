@@ -11,7 +11,7 @@ app = Flask(__name__)
 line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(os.environ['CHANNEL_SECRET'])
 
-shared_folder = 'https://drive.google.com/drive/folders/1rlWgfwZxFhrSK_pwBKbjBxyZ0E2Rrx2b?usp=sharing'
+shared_folder = 'shared'
 
 @app.route("/callback", methods=['POST'])
 def callback():
