@@ -22,7 +22,7 @@ def check_and_save_user(userID, folder):#, user_filename='users.pkl', mood_filen
 
     # if userID in users.keys():
     if len(users) == 0:
-        print('""" user already """'')
+        print('""" user already """')
         return
 
     # users[userID] = datetime.date.today()
