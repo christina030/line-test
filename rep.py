@@ -85,3 +85,19 @@ def add_row(table_name, col_names, values):
     cursor.close()
     conn.close()
     return
+
+def modify_val(table_name, col_names, values, user_id):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cursor = conn.cursor()
+  
+    # cmd = '''UPDATE table_name
+    #     SET column1 = value1, column2 = value2, ...
+    #     WHERE condition;'''
+    for i in range(len(col_names)):
+        cmd = 'UPDATE ' + table_name + ' SET ' + col_names[i] + ' = ' + values[i] + ' WHERE user_id = ' + user_id + ';'
+        cursor.execute(cmd)
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+    return
