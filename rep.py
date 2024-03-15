@@ -3,7 +3,7 @@ import psycopg2
 import re
 # import dj_database_url
 
-# DATABASE_URL = os.environ.get('DATABASE_URL')
+DATABASE_URL = os.environ.get('DATABASE_URL')
 # # DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a little-soul').read()[:-1]
 
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -28,9 +28,7 @@ def table_exists(cursor, table_name):
         return False
     # return cursor.fetchone() is not None
 
-def create_tables():
-    DATABASE_URL = os.environ.get('DATABASE_URL')
-    
+def create_tables():    
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
   
@@ -75,4 +73,17 @@ def create_tables():
     conn.close()
 
 def add_row(table_name, col_names, values):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cursor = conn.cursor()
+  
+    if not table_exists(cursor, 'users'):
+        cmd = '''CREATE TABLE users(
+           user_id VARCHAR (50) NOT NULL,
+           done_date DATE NOT NULL
+        );'''
+        cursor.execute(cmd)
+        conn.commit()
+
+    cursor.close()
+    conn.close()
     return
