@@ -112,10 +112,12 @@ def modify_val(table_name, col_names, values, user_id):
     # cmd = '''UPDATE table_name
     #     SET column1 = value1, column2 = value2, ...
     #     WHERE condition;'''
+    print('""" modify """')
     for i in range(len(col_names)):
         cmd = f'UPDATE {table_name} SET {col_names[i]} = {values[i]} WHERE user_id = \'{user_id}\';'
         cursor.execute(cmd)
         conn.commit()
+        print(cmd)
 
     cursor.close()
     conn.close()
@@ -148,6 +150,7 @@ def delete_row(table_name, user_id):
     cmd = f'DELETE FROM {table_name} WHERE user_id = \'{user_id}\';'
     cursor.execute(cmd)
     conn.commit()
+    print('""" delete """', cmd)
     
     cursor.close()
     conn.close()
