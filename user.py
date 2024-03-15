@@ -6,14 +6,18 @@ import pickle
 import os
 import datetime
 
+from rep import add_row, read_data
 
-def check_and_save_user(userID, folder, user_filename='users.pkl', mood_filename='mood_scores.pkl', action_filename='action_done.pkl'):
+
+def check_and_save_user(userID, folder):#, user_filename='users.pkl', mood_filename='mood_scores.pkl', action_filename='action_done.pkl'):
     # user file
-    users = None
-    with open(os.path.join(folder, user_filename), 'rb') as f:
-        users = pickle.load(f)
+    users = read_data('users', 'user_id')
+    # users = None
+    # with open(os.path.join(folder, user_filename), 'rb') as f:
+    #     users = pickle.load(f)
 
-    if userID in users.keys():
+    # if userID in users.keys():
+    if userID in users:
         return
 
     users[userID] = datetime.date.today()
