@@ -64,19 +64,20 @@ def reply_img(tk, text, mood, folder, fontsize=72, color=(255,255,255), margin=2
 def handle_diary(tk, userID, text, mood, line_bot_api, folder):
     print('Text: ', text)
     if "---\n想記錄的話：\n---\n" in text:
-        img_url = reply_img(tk, text, mood, folder)   # 取得對應的圖片，如果沒有取得，會是 False
-        print(img_url)
-        if img_url:
-            # 如果有圖片網址，回傳圖片
-            img_message = ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0])
-            line_bot_api.reply_message(tk, img_message)
-            os.system(f'rm {img_url[1]}')
+        save_mood(userID, mood, folder)
+        # img_url = reply_img(tk, text, mood, folder)   # 取得對應的圖片，如果沒有取得，會是 False
+        # print(img_url)
+        # if img_url:
+        #     # 如果有圖片網址，回傳圖片
+        #     img_message = ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0])
+        #     line_bot_api.reply_message(tk, img_message)
+        #     os.system(f'rm {img_url[1]}')
 
-            save_mood(userID, mood, folder)
-        else:
-            # 如果是 False，回傳文字
-            text_message = TextSendMessage(text='找不到相關日記圖片')
-            line_bot_api.reply_message(tk, text_message)
+        #     save_mood(userID, mood, folder)
+        # else:
+        #     # 如果是 False，回傳文字
+        #     text_message = TextSendMessage(text='找不到相關日記圖片')
+        #     line_bot_api.reply_message(tk, text_message)
     else:
         text_message = TextSendMessage(text='請保留\n---\n想記錄的話：\n---\n')
         line_bot_api.reply_message(tk, text_message)
