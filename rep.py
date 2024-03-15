@@ -2,14 +2,17 @@ import os
 import psycopg2
 # import dj_database_url
 
-# DATABASE_URL = os.environ.get('DATABASE_URL')
-# # DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a little-soul').read()[:-1]
+DATABASE_URL = os.environ.get('DATABASE_URL')
+# DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a little-soul').read()[:-1]
 
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-# cursor = conn.cursor()
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cursor = conn.cursor()
 
-# cursor.close()
-# conn.close()
+sql = "SHOW DATABASES"
+cursor.execute(sql)
+
+cursor.close()
+conn.close()
 
 def table_exists(cursor, table_name):
     sql = "SHOW TABLES LIKE '%s'" % table_name
