@@ -102,7 +102,7 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
         # action_done[userID] = today
         # with open(os.path.join(folder, action_filename), 'wb') as f:
         #     pickle.dump(action_done, f)
-        modify_val('actions', ['done_date'], [today], userID)
+        modify_val('actions', ['done_date'], [today.strftime('%Y-%m-%d')], userID)
 
         # change mood score
         mood_scores = read_data('scores', 'score1, score2, score3, score4, score5', userID)
