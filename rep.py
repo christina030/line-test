@@ -82,7 +82,7 @@ def add_row(table_name, col_names, values):
   
     # cmd = '''INSERT INTO table_name (column1, column2, column3, ...)
     #     VALUES (value1, value2, value3, ...);'''
-    cmd = 'INSERT INTO ' + table_name + ' (' + col_names + ') VALUES (' + values + ');'
+    cmd = f'INSERT INTO {table_name} {col_names} VALUES {values};'
     cursor.execute(cmd)
     conn.commit()
 
@@ -97,7 +97,7 @@ def modify_val(table_name, col_names, values, user_id):
     #     SET column1 = value1, column2 = value2, ...
     #     WHERE condition;'''
     for i in range(len(col_names)):
-        cmd = 'UPDATE ' + table_name + ' SET ' + col_names[i] + ' = ' + values[i] + ' WHERE user_id = ' + user_id + ';'
+        cmd = f'UPDATE {table_name} SET {col_names[i]} = {values[i]} WHERE user_id = {user_id};'
         cursor.execute(cmd)
     conn.commit()
 
