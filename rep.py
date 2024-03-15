@@ -1,9 +1,10 @@
 import os
 import psycopg2
+import dj_database_url
 
 DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a little-soul').read()[:-1]
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require', host='/tmp')
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cursor = conn.cursor()
 
 cursor.close()
