@@ -111,10 +111,10 @@ def read_data(table_name, col_names, user_id=None):
     # cmd = '''SELECT column_names
     #     FROM table_name
     #     WHERE column_name IS NULL;'''
-    if user_id is None:
-        cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ';'
-    else:
-        cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ' WHERE user_id = ' + user_id + ';'
+    # if user_id is None:
+    #     cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ';'
+    # else:
+    cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ' WHERE user_id = ' + user_id + ';'
     cursor.execute(cmd)
     
     values = [cursor.fetchall()]
