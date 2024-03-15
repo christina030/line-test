@@ -1,5 +1,6 @@
 import os
 import psycopg2
+import re
 # import dj_database_url
 
 # DATABASE_URL = os.environ.get('DATABASE_URL')
@@ -12,9 +13,16 @@ import psycopg2
 # conn.close()
 
 def table_exists(cursor, table_name):
-    sql = "SHOW TABLES WHERE Tables_in_mydb LIKE '%s'" % table_name
+    sql = 'SHOW TABLES'
     cursor.execute(sql)
-    return cursor.fetchone() is not None
+    tables = [cursor.fetchall()]
+    table_list = re.findall('(\'.*?\')', str(tables))
+    table_list = [re.sub("'", '', each) for each in table_list]
+    if table_name in table_list:
+        return True
+    else:
+        return False
+    # return cursor.fetchone() is not None
 
 def create_tables():
     DATABASE_URL = os.environ.get('DATABASE_URL')
