@@ -21,7 +21,7 @@ def check_and_save_user(userID, folder):#, user_filename='users.pkl', mood_filen
     #     users = pickle.load(f)
 
     # if userID in users.keys():
-    if users is None:
+    if users is not None:
         print('""" user already """')
         return
 
