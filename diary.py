@@ -8,6 +8,7 @@ import numpy as np
 import datetime
 
 from imgur import glucose_graph
+from rep import modify_val, read_data
 
 
 # 回覆圖片或影片訊息
@@ -80,27 +81,39 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
         text_message = TextSendMessage(text='請保留\n---\n想記錄的話：\n---\n')
         line_bot_api.reply_message(tk, text_message)
 
-def save_mood(userID, mood, folder, mood_filename='mood_scores.pkl', action_filename='action_done.pkl'):
+def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_filename='action_done.pkl'):
     # check if action done
-    action_done = None
-    with open(os.path.join(folder, action_filename), 'rb') as f:
-        action_done = pickle.load(f)
+    action_done = read_data('actions', 'done_date', userID)
+    print('"""\nactions:')
+    print(action_done)
+    print(type(action_done))
+    print('"""')
+    # action_done = None
+    # with open(os.path.join(folder, action_filename), 'rb') as f:
+    #     action_done = pickle.load(f)
 
     today = datetime.date.today()
-    if action_done[userID] == today:
-        return
-    else:
-        action_done[userID] = today
-        with open(os.path.join(folder, action_filename), 'wb') as f:
-            pickle.dump(action_done, f)
+    # if action_done[userID] == today:
+    #     return
+    # else:
+    if len(action_done) > 0 and action_done[0] != today:
+        # action_done[userID] = today
+        # with open(os.path.join(folder, action_filename), 'wb') as f:
+        #     pickle.dump(action_done, f)
+        modify_val('actions', ['done_date'], [today], userID)
 
         # change mood score
-        mood_scores = None
-        with open(os.path.join(folder, mood_filename), 'rb') as f:
-            mood_scores = pickle.load(f)
+        mood_scores = read_data('scores', 'score1, score2, score3, score4, score5', userID)
+        print('"""\nscores:')
+        print(mood_scores)
+        print(type(mood_scores))
+        print('"""')
+        # mood_scores = None
+        # with open(os.path.join(folder, mood_filename), 'rb') as f:
+        #     mood_scores = pickle.load(f)
 
-        mood_scores[userID][-1] += (mood + 1)
-        print(userID, '分數：', mood_scores[userID][-1])
+        # mood_scores[userID][-1] += (mood + 1)
+        # print(userID, '分數：', mood_scores[userID][-1])
 
-        with open(os.path.join(folder, mood_filename), 'wb') as f:
-            pickle.dump(mood_scores, f)
+        # with open(os.path.join(folder, mood_filename), 'wb') as f:
+        #     pickle.dump(mood_scores, f)
