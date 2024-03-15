@@ -110,7 +110,7 @@ def modify_val(table_name, col_names, values, user_id):
     for i in range(len(col_names)):
         cmd = f'UPDATE {table_name} SET {col_names[i]} = {values[i]} WHERE user_id = \'{user_id}\';'
         cursor.execute(cmd)
-    conn.commit()
+        conn.commit()
 
     cursor.close()
     conn.close()
@@ -134,3 +134,15 @@ def read_data(table_name, col_names, user_id=None):
     conn.close()
 
     return values
+
+def delete_row(table_name, user_id):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cursor = conn.cursor()
+  
+    # cmd = '''DELETE FROM table_name WHERE condition;'''
+    cmd = f'DELETE FROM {table_name} WHERE user_id = \'{user_id}\';'
+    cursor.execute(cmd)
+    conn.commit()
+    
+    cursor.close()
+    conn.close()
