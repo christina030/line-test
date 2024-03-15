@@ -90,6 +90,8 @@ def add_row(table_name, col_names, values):
     #     VALUES (value1, value2, value3, ...);'''
     if isinstance(values, tuple):
         cmd = f'INSERT INTO {table_name} {col_names} VALUES {values};'
+    elif isinstance(values, str):
+        cmd = f'INSERT INTO {table_name} {col_names} VALUES (\'{values}\');'
     else:
         cmd = f'INSERT INTO {table_name} {col_names} VALUES ({values});'
     cursor.execute(cmd)
