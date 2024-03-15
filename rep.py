@@ -9,14 +9,18 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 cursor = conn.cursor()
 
-cmd = 'DROP TABLE users;'
-cursor.execute(cmd)
-cmd = 'DROP TABLE actions;'
-cursor.execute(cmd)
-cmd = 'DROP TABLE scores;'
-cursor.execute(cmd)
-cmd = 'DROP TABLE msgs;'
-cursor.execute(cmd)
+if table_exists(cursor, 'users'):
+    cmd = 'DROP TABLE users;'
+    cursor.execute(cmd)
+if table_exists(cursor, 'actions'):
+    cmd = 'DROP TABLE actions;'
+    cursor.execute(cmd)
+if table_exists(cursor, 'scores'):
+    cmd = 'DROP TABLE scores;'
+    cursor.execute(cmd)
+if table_exists(cursor, 'msgs'):
+    cmd = 'DROP TABLE msgs;'
+    cursor.execute(cmd)
 conn.commit()
 
 cursor.close()
