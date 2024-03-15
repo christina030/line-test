@@ -97,7 +97,7 @@ def modify_val(table_name, col_names, values, user_id):
     #     SET column1 = value1, column2 = value2, ...
     #     WHERE condition;'''
     for i in range(len(col_names)):
-        cmd = f'UPDATE {table_name} SET {col_names[i]} = {values[i]} WHERE user_id = {user_id};'
+        cmd = f'UPDATE {table_name} SET {col_names[i]} = {values[i]} WHERE user_id = \'{user_id}\';'
         cursor.execute(cmd)
     conn.commit()
 
@@ -114,7 +114,7 @@ def read_data(table_name, col_names, user_id=None):
     # if user_id is None:
     #     cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ';'
     # else:
-    cmd = 'SELECT ' + col_names + ' FROM ' + table_name + ' WHERE user_id = ' + user_id + ';'
+    cmd = f'SELECT {col_names} FROM {table_name} WHERE user_id = \'{user_id}\';'
     cursor.execute(cmd)
     
     values = [cursor.fetchall()]
