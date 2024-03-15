@@ -73,3 +73,6 @@ def create_tables():
     
     cursor.close()
     conn.close()
+
+def add_row(table_name, col_names, values):
+    return
