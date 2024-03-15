@@ -11,7 +11,7 @@ from rep import add_row, read_data
 
 def check_and_save_user(userID, folder):#, user_filename='users.pkl', mood_filename='mood_scores.pkl', action_filename='action_done.pkl'):
     # user file
-    users = read_data('users', 'user_id')
+    users = read_data('users', 'user_id', userID)
     print('"""\nusers:')
     print(users)
     print(type(users))
@@ -21,7 +21,7 @@ def check_and_save_user(userID, folder):#, user_filename='users.pkl', mood_filen
     #     users = pickle.load(f)
 
     # if userID in users.keys():
-    if userID in users:
+    if len(users) == 0:
         return
 
     # users[userID] = datetime.date.today()
