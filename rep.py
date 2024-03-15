@@ -12,7 +12,7 @@ import psycopg2
 # conn.close()
 
 def table_exists(cursor, table_name):
-    sql = "SHOW TABLES WHERE Tables_in_tianyan LIKE '%s'" % table_name
+    sql = "SHOW TABLES WHERE Tables_in_mydb LIKE '%s'" % table_name
     cursor.execute(sql)
     return cursor.fetchone() is not None
 
