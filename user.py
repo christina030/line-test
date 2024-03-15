@@ -28,7 +28,7 @@ def check_and_save_user(userID, folder):#, user_filename='users.pkl', mood_filen
 
     # with open(os.path.join(folder, user_filename), 'wb') as f:
     #     pickle.dump(users, f)
-    add_row('users', '(user_id, first_date)', (userID, datetime.date.today()))
+    add_row('users', '(user_id, first_date)', (userID, datetime.date.today().strftime('%Y-%m-%d')))
 
     # mood score file
     # mood_scores = None
