@@ -5,6 +5,7 @@ from linebot.models import *
 import os
 
 from message import check_handle_message
+import rep
 
 app = Flask(__name__)
 
