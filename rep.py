@@ -6,11 +6,15 @@ import re
 DATABASE_URL = os.environ.get('DATABASE_URL')
 # # DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a little-soul').read()[:-1]
 
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-# cursor = conn.cursor()
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+cursor = conn.cursor()
 
-# cursor.close()
-# conn.close()
+cmd = 'DROP TABLE users;'
+cursor.execute(cmd)
+conn.commit()
+
+cursor.close()
+conn.close()
 
 def table_exists(cursor, table_name):
     cmd = """SELECT table_name FROM information_schema.tables
@@ -35,7 +39,7 @@ def create_tables():
     if not table_exists(cursor, 'users'):
         cmd = '''CREATE TABLE users(
            user_id VARCHAR (50) NOT NULL,
-           done_date DATE NOT NULL
+           first_date DATE NOT NULL
         );'''
         cursor.execute(cmd)
         conn.commit()
