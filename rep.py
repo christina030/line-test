@@ -13,13 +13,11 @@ import re
 # conn.close()
 
 def table_exists(cursor, table_name):
-    # sql = """SELECT % FROM information_schema.tables
-    #        WHERE table_schema = 'public'"""
-    # cursor.execute("""SELECT table_name FROM information_schema.tables
-    #        WHERE table_schema = 'public'""")
+    sql = """SELECT % FROM information_schema.tables
+           WHERE table_schema = 'public'""" % table_name
     # for table in cursor.fetchall():
     #     print(table)
-    sql = 'SHOW TABLES;'
+    # sql = 'SHOW TABLES;'
     cursor.execute(sql)
     tables = [cursor.fetchall()]
     table_list = re.findall('(\'.*?\')', str(tables))
