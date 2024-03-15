@@ -6,15 +6,15 @@ import re
 DATABASE_URL = os.environ.get('DATABASE_URL')
 # # DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a little-soul').read()[:-1]
 
-conn = psycopg2.connect(DATABASE_URL, sslmode='require')
-cursor = conn.cursor()
+# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+# cursor = conn.cursor()
 
-cmd = 'DROP TABLE users;'
-cursor.execute(cmd)
-conn.commit()
+# cmd = 'DROP TABLE users;'
+# cursor.execute(cmd)
+# conn.commit()
 
-cursor.close()
-conn.close()
+# cursor.close()
+# conn.close()
 
 def table_exists(cursor, table_name):
     cmd = """SELECT table_name FROM information_schema.tables
