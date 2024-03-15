@@ -97,7 +97,7 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
     # if action_done[userID] == today:
     #     return
     # else:
-    if action_done is not None and action_done[0] != today:
+    if action_done is not None and datetime.strptime(action_done[0], '%Y-%m-%d') != today:
         print('""" today not done """')
         # action_done[userID] = today
         # with open(os.path.join(folder, action_filename), 'wb') as f:
@@ -114,8 +114,11 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
         # with open(os.path.join(folder, mood_filename), 'rb') as f:
         #     mood_scores = pickle.load(f)
 
+        new_score = mood_scores[-1] + (mood + 1)
+        print(userID, '分數：', new_score)
         # mood_scores[userID][-1] += (mood + 1)
         # print(userID, '分數：', mood_scores[userID][-1])
 
+        modify_val('scores', [f'score{len(mood_scores)}'], [new_score], userID)
         # with open(os.path.join(folder, mood_filename), 'wb') as f:
         #     pickle.dump(mood_scores, f)
