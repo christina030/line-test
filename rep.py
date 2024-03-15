@@ -49,6 +49,7 @@ def create_tables():
         );'''
         cursor.execute(cmd)
         conn.commit()
+        print('""" create users """')
     
     if not table_exists(cursor, 'actions'):
         cmd = '''CREATE TABLE actions(
@@ -57,6 +58,7 @@ def create_tables():
         );'''
         cursor.execute(cmd)
         conn.commit()
+        print('""" create actions """')
     
     if not table_exists(cursor, 'scores'):
         cmd = '''CREATE TABLE scores(
@@ -69,6 +71,7 @@ def create_tables():
         );'''
         cursor.execute(cmd)
         conn.commit()
+        print('""" create scores """')
     
     if not table_exists(cursor, 'msgs'):
         cmd = '''CREATE TABLE msgs(
@@ -78,6 +81,7 @@ def create_tables():
         );'''
         cursor.execute(cmd)
         conn.commit()
+        print('""" create msgs """')
     
     cursor.close()
     conn.close()
