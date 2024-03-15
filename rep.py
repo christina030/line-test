@@ -132,7 +132,7 @@ def read_data(table_name, col_names, user_id=None):
     cmd = f'SELECT {col_names} FROM {table_name} WHERE user_id = \'{user_id}\';'
     cursor.execute(cmd)
     
-    values = [cursor.fetchall()]
+    values = cursor.fetchall()
 
     cursor.close()
     conn.close()
