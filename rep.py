@@ -88,8 +88,10 @@ def add_row(table_name, col_names, values):
   
     # cmd = '''INSERT INTO table_name (column1, column2, column3, ...)
     #     VALUES (value1, value2, value3, ...);'''
-    print(type(values))
-    cmd = f'INSERT INTO {table_name} {col_names} VALUES {values};'
+    if isinstance(values, tuple):
+        cmd = f'INSERT INTO {table_name} {col_names} VALUES {values};'
+    else:
+        cmd = f'INSERT INTO {table_name} {col_names} VALUES ({values});'
     cursor.execute(cmd)
     conn.commit()
 
