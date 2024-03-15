@@ -100,14 +100,17 @@ def modify_val(table_name, col_names, values, user_id):
     cursor.close()
     conn.close()
 
-def read_data(table_name, col_names, user_id):
+def read_data(table_name, col_names, user_id=None):
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
   
     # cmd = '''SELECT column_names
     #     FROM table_name
     #     WHERE column_name IS NULL;'''
-    cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ' WHERE user_id = ' + user_id + ';'
+    if user_id is None:
+        cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ';'
+    else:
+        cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ' WHERE user_id = ' + user_id + ';'
     cursor.execute(cmd)
     
     values = [cursor.fetchall()]
