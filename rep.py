@@ -13,8 +13,8 @@ import re
 # conn.close()
 
 def table_exists(cursor, table_name):
-    sql = """SELECT % FROM information_schema.tables
-           WHERE table_schema = 'public'""" % table_name
+    sql = 'SELECT ' + table_name + """ FROM information_schema.tables
+           WHERE table_schema = 'public'"""
     # for table in cursor.fetchall():
     #     print(table)
     # sql = 'SHOW TABLES;'
