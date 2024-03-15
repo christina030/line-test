@@ -19,7 +19,7 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
         text = event.message.text
     userID = event.source.user_id
     print('""" receive """', event)
-    print(tk, text, userID)
+    print(text, tk, userID)
 
     # check_and_save_user
     check_and_save_user(userID, folder)
