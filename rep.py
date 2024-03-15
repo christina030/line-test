@@ -1,6 +1,6 @@
 import os
 import psycopg2
-import dj_database_url
+# import dj_database_url
 
 DATABASE_URL = os.popen('heroku config:get DATABASE_URL -a little-soul').read()[:-1]
 
