@@ -76,13 +76,11 @@ def add_row(table_name, col_names, values):
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
     cursor = conn.cursor()
   
-    if not table_exists(cursor, 'users'):
-        cmd = '''CREATE TABLE users(
-           user_id VARCHAR (50) NOT NULL,
-           done_date DATE NOT NULL
-        );'''
-        cursor.execute(cmd)
-        conn.commit()
+    # cmd = '''INSERT INTO table_name (column1, column2, column3, ...)
+    #     VALUES (value1, value2, value3, ...);'''
+    cmd = 'INSERT INTO ' + table_name + ' ' + col_names + ' VALUES ' + values + ';'
+    cursor.execute(cmd)
+    conn.commit()
 
     cursor.close()
     conn.close()
