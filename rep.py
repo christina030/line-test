@@ -13,7 +13,7 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 # conn.close()
 
 def table_exists(cursor, table_name):
-    sql = 'SELECT ' + table_name + """ FROM information_schema.tables
+    sql = """SELECT table_name FROM information_schema.tables
            WHERE table_schema = 'public'"""
     # for table in cursor.fetchall():
     #     print(table)
