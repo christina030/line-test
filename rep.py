@@ -100,6 +100,7 @@ def add_row(table_name, col_names, values):
         cmd = f'INSERT INTO {table_name} {col_names} VALUES ({values});'
     cursor.execute(cmd)
     conn.commit()
+    print('""" add """', cmd)
 
     cursor.close()
     conn.close()
