@@ -13,12 +13,12 @@ DATABASE_URL = os.environ.get('DATABASE_URL')
 # conn.close()
 
 def table_exists(cursor, table_name):
-    sql = """SELECT table_name FROM information_schema.tables
+    cmd = """SELECT table_name FROM information_schema.tables
            WHERE table_schema = 'public'"""
     # for table in cursor.fetchall():
     #     print(table)
     # sql = 'SHOW TABLES;'
-    cursor.execute(sql)
+    cursor.execute(cmd)
     tables = [cursor.fetchall()]
     table_list = re.findall('(\'.*?\')', str(tables))
     table_list = [re.sub("'", '', each) for each in table_list]
@@ -78,13 +78,12 @@ def add_row(table_name, col_names, values):
   
     # cmd = '''INSERT INTO table_name (column1, column2, column3, ...)
     #     VALUES (value1, value2, value3, ...);'''
-    cmd = 'INSERT INTO ' + table_name + ' ' + col_names + ' VALUES ' + values + ';'
+    cmd = 'INSERT INTO ' + table_name + ' (' + col_names + ') VALUES (' + values + ');'
     cursor.execute(cmd)
     conn.commit()
 
     cursor.close()
     conn.close()
-    return
 
 def modify_val(table_name, col_names, values, user_id):
     conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -100,4 +99,20 @@ def modify_val(table_name, col_names, values, user_id):
 
     cursor.close()
     conn.close()
-    return
+
+def read_data(table_name, col_names, user_id):
+    conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    cursor = conn.cursor()
+  
+    # cmd = '''SELECT column_names
+    #     FROM table_name
+    #     WHERE column_name IS NULL;'''
+    cmd = 'SELECT ' + column_names + ' FROM ' + table_name + ' WHERE user_id = ' + user_id + ';'
+    cursor.execute(cmd)
+    
+    values = [cursor.fetchall()]
+
+    cursor.close()
+    conn.close()
+
+    return values
