@@ -27,7 +27,7 @@ def callback():
         abort(400)
     return 'OK'
 
-@handler.add(MessageEvent, message=TextMessage)
+@handler.add(MessageEvent)#, message=TextMessage)
 def handle_message(event):
     check_handle_message(event, line_bot_api, shared_folder)
 
