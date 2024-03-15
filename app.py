@@ -5,12 +5,14 @@ from linebot.models import *
 import os
 
 from message import check_handle_message
-import rep
+from rep import create_tables
 
 app = Flask(__name__)
 
 line_bot_api = LineBotApi(os.environ['CHANNEL_ACCESS_TOKEN'])
 handler = WebhookHandler(os.environ['CHANNEL_SECRET'])
+
+create_tables()
 
 shared_folder = 'shared'
 
