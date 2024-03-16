@@ -99,7 +99,7 @@ def grow_plant(tk, mood_score, folder):
     imgSavePath = os.path.join('shared', tk + '_plant.jpg')
     cv2.imwrite(imgSavePath, img)
 
-    img_url = glucose_graph(client_id, imgSavePath)
+    img_url = glucose_graph(imgSavePath)
 
     if img:
       return (img_url, imgSavePath)
