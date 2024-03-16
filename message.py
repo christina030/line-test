@@ -61,5 +61,5 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
         #     pickle.dump(msgs, f)
 
     # elif text == 'change-to-plant':
-    elif text == '植栽':
+    elif text == 'change-to-plant' or text == '植栽':
         handle_grow(tk, userID, line_bot_api, folder)
