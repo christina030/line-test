@@ -65,21 +65,21 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
 def grow_plant(tk, mood_score, folder):
     img_name = [
-        'plant1.png',
-        ['plant2.png',
-         'plant3.png',
-         'plant4.png',
-         'plant5.png'],
-        ['plant2_2.png',
-         'plant2_3.png',
-         'plant2_4.png',
-         'plant2_5.png'],
-        ['plant3_2.png',
-         'plant3_3.png',
-         'plant3_4.png',
-         'plant3_5.png']
+        '0.png',
+        ['1-1.png',
+         '2-1.png',
+         '3-1.png',
+         '4-1.png'],
+        ['1-2.png',
+         '2-2.png',
+         '3-2.png',
+         '4-2.png'],
+        ['1-3.png',
+         '2-3.png',
+         '3-3.png',
+         '4-3.png']
     ]
-
+    
     img = cv2.imread(os.path.join('shared', img_name[0]), cv2.IMREAD_UNCHANGED)
 
     for i, mood in enumerate(mood_score[:-1]):
