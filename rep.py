@@ -48,7 +48,6 @@ def create_tables():
            first_date DATE NOT NULL
         );'''
         cursor.execute(cmd)
-        conn.commit()
         print('""" create users """')
     
     if not table_exists(cursor, 'actions'):
@@ -57,7 +56,6 @@ def create_tables():
            done_date DATE
         );'''
         cursor.execute(cmd)
-        conn.commit()
         print('""" create actions """')
     
     if not table_exists(cursor, 'scores'):
@@ -70,7 +68,6 @@ def create_tables():
            score5 SMALLINT
         );'''
         cursor.execute(cmd)
-        conn.commit()
         print('""" create scores """')
     
     if not table_exists(cursor, 'msgs'):
@@ -80,8 +77,9 @@ def create_tables():
            mood SMALLINT NOT NULL
         );'''
         cursor.execute(cmd)
-        conn.commit()
         print('""" create msgs """')
+        
+    conn.commit()
     
     cursor.close()
     conn.close()
