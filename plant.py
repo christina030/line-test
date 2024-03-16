@@ -101,7 +101,7 @@ def grow_plant(tk, mood_score, folder):
 
     img_url = glucose_graph(imgSavePath)
 
-    if img:
+    if img is not None:
       return (img_url, imgSavePath)
     else:
       # 如果找不到對應的圖片，回傳 False
