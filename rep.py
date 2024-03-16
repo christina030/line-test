@@ -116,8 +116,8 @@ def modify_val(table_name, col_names, values, user_id):
     for i in range(len(col_names)):
         cmd = f'UPDATE {table_name} SET {col_names[i]} = {values[i]} WHERE user_id = \'{user_id}\';'
         cursor.execute(cmd)
-        conn.commit()
         print(cmd)
+    conn.commit()
 
     cursor.close()
     conn.close()
