@@ -83,7 +83,8 @@ def grow_plant(tk, mood_score, folder):
     img = cv2.imread(os.path.join('shared', img_name[0]), cv2.IMREAD_UNCHANGED)
 
     for i, mood in enumerate(mood_score[:-1]):
-        img2 = cv2.imread(os.path.join('shared', img_name[3][i]), cv2.IMREAD_UNCHANGED)
+        ############################################################
+        img2 = cv2.imread(os.path.join('shared', img_name[1][i]), cv2.IMREAD_UNCHANGED)
         # if mood is None:
         #     break
         # if mood < mood_ranges[i][0]:
@@ -92,6 +93,7 @@ def grow_plant(tk, mood_score, folder):
         #     img2 = cv2.imread(os.path.join('shared', img_name[2][i]), cv2.IMREAD_UNCHANGED)
         # else:
         #     img2 = cv2.imread(os.path.join('shared', img_name[3][i]), cv2.IMREAD_UNCHANGED)
+        ############################################################
 
         # img[img2 != [0, 0, 0]] = img2[img2 != [0, 0, 0]]
         alpha = np.transpose(np.tile(img2[:, :, -1], (3, 1, 1)), (1, 2, 0)) / 255.
