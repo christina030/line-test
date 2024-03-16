@@ -48,7 +48,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
     print(f'""" 第{days}天 """', userID)
     ############################################################
-    img_url = grow_plant(tk, mood_scores[userID], folder)   # 取得對應的圖片，如果沒有取得，會是 False
+    img_url = grow_plant(tk, mood_scores, folder)   # 取得對應的圖片，如果沒有取得，會是 False
     print(img_url)
     if img_url:
         # 如果有圖片網址，回傳圖片
