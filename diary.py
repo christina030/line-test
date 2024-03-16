@@ -53,7 +53,7 @@ def reply_img(tk, text, mood, folder, fontsize=72, color=(255,255,255), margin=2
     imgSavePath = os.path.join(folder, tk + '_diary.jpg')
     cv2.imwrite(imgSavePath, imgCv2)
 
-    img_url = glucose_graph(client_id, imgSavePath)
+    img_url = glucose_graph(imgSavePath)
 
     if mood < len(img):
       return (img_url, imgSavePath)
