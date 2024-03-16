@@ -5,6 +5,7 @@
 import pickle
 import os
 import datetime
+from datetime import datetime as dt
 import cv2
 from linebot.models import TextSendMessage, ImageSendMessage    # 載入 TextSendMessage 和 ImageSendMessage 模組
 
@@ -35,7 +36,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
     today = datetime.date.today()
     # days = (today - users[userID]).days
-    days = (today - datetime.strptime(user_date[0], '%Y-%m-%d')).days
+    days = (today - dt.strptime(user_date[0], '%Y-%m-%d')).days
 
     if days in grow_days:
         # mood_scores[userID].append(0)
