@@ -123,6 +123,6 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
         # mood_scores[userID][-1] += (mood + 1)
         # print(userID, '分數：', mood_scores[userID][-1])
 
-        modify_val('scores', [f'score{len(mood_scores)}'], [new_score], userID)
+        modify_val('scores', [f'score{mood_scores.index(None)}'], [new_score], userID)
         # with open(os.path.join(folder, mood_filename), 'wb') as f:
         #     pickle.dump(mood_scores, f)
