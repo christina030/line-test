@@ -63,7 +63,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
 
 def grow_plant(tk, mood_score, folder):
-    img = [
+    img_name = [
         'plant1.png',
         ['plant2.png',
          'plant3.png',
@@ -79,15 +79,15 @@ def grow_plant(tk, mood_score, folder):
          'plant3_5.png']
     ]
 
-    img = cv2.imread(os.path.join('shared', img[0]), cv2.IMREAD_UNCHANGED)
+    img = cv2.imread(os.path.join('shared', img_name[0]), cv2.IMREAD_UNCHANGED)
 
     for i, mood in enumerate(mood_score[:-1]):
         if mood < mood_ranges[i][0]:
-            img2 = cv2.imread(os.path.join('shared', img[1][i]), cv2.IMREAD_UNCHANGED)
+            img2 = cv2.imread(os.path.join('shared', img_name[1][i]), cv2.IMREAD_UNCHANGED)
         elif mood < mood_ranges[i][1]:
-            img2 = cv2.imread(os.path.join('shared', img[2][i]), cv2.IMREAD_UNCHANGED)
+            img2 = cv2.imread(os.path.join('shared', img_name[2][i]), cv2.IMREAD_UNCHANGED)
         else:
-            img2 = cv2.imread(os.path.join('shared', img[3][i]), cv2.IMREAD_UNCHANGED)
+            img2 = cv2.imread(os.path.join('shared', img_name[3][i]), cv2.IMREAD_UNCHANGED)
 
         # img[img2 != [0, 0, 0]] = img2[img2 != [0, 0, 0]]
         img = img * (1 - img2[:, :, -1]) + img2 * img2[:, :, -1]
