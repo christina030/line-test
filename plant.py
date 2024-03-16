@@ -36,7 +36,8 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
     today = datetime.date.today()
     # days = (today - users[userID]).days
-    days = (today - dt.strptime(user_date[0], '%Y-%m-%d')).days
+    days = (today - user_date[0]).days
+    # days = (today - dt.strptime(user_date[0], '%Y-%m-%d')).days
 
     if days in grow_days:
         # mood_scores[userID].append(0)
