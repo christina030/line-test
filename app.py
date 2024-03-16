@@ -30,8 +30,22 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print('""" handle """')
+    print('""" handle message """')
     check_handle_message(event, line_bot_api, shared_folder)
+
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    print('""" handle message """')
+    check_handle_message(event, line_bot_api, shared_folder)
+    # ts = event.postback.data
+    # print(ts)
+    # keyword = ts[7:]
+    # print(keyword)
+    # if ts[7:] == '{}'.format(keyword):
+
+    #     text_message = TextSendMessage(text='訊息{}'.format(keyword))
+
+    #     line_bot_api.reply_message(event.reply_token, text_message)
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
