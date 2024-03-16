@@ -90,7 +90,8 @@ def grow_plant(tk, mood_score, folder):
             img2 = cv2.imread(os.path.join('shared', img_name[3][i]), cv2.IMREAD_UNCHANGED)
 
         # img[img2 != [0, 0, 0]] = img2[img2 != [0, 0, 0]]
-        img = img * (1 - img2[:, :, -1]) + img2 * img2[:, :, -1]
+        alpha = np.transpose(np.tile(img2[:, :, -1], (3, 1, 1)), (1, 2, 0)) / 255.
+        img[:, :, :-1] = img[:, :, :-1] * (1 - alpha) + img2[:, :, :-1] * alpha
 
     imgSavePath = os.path.join('shared', tk + '_plant.jpg')
     cv2.imwrite(imgSavePath, img)
