@@ -38,9 +38,9 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
     # if userID in msgs.keys():
     if msgs is not None:
         print('""" have chosen mood """')
-        if tk != msgs[0][0]:
+        if tk != msgs[0]:
             print('Start handle diary!')
-            handle_diary(tk, userID, text, msgs[0][1], line_bot_api, folder)
+            handle_diary(tk, userID, text, msgs[1], line_bot_api, folder)
             print('End handle diary!')
             delete_row('msgs', userID)
         # if msgs[userID][0][1] == 'diary':
