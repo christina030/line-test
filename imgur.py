@@ -7,7 +7,7 @@ import pyimgur
 """
 
 client_id = 'bde19e3500c4e17'
-def glucose_graph(client_id, imgpath):
+def glucose_graph(imgpath):
     im = pyimgur.Imgur(client_id)
     upload_image = im.upload_image(imgpath, title='Uploaded with PyImgur')
     return upload_image.link
