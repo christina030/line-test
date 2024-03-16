@@ -44,7 +44,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
         # with open(os.path.join(folder, mood_filename), 'wb') as f:
         #     pickle.dump(mood_scores, f)
-        modify_val('scores', [f'score{len(mood_scores)+1}'], [0], userID)
+        modify_val('scores', [f'score{mood_scores.index(None)+1}'], [0], userID)
 
     print(f'""" 第{days}天 """', userID)
     ############################################################
