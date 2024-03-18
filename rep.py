@@ -45,7 +45,8 @@ def create_tables():
     if not table_exists(cursor, 'users'):
         cmd = '''CREATE TABLE users(
            user_id VARCHAR (50) NOT NULL,
-           first_date DATE NOT NULL
+           first_date DATE NOT NULL,
+           first_time BOOL NOT NULL
         );'''
         cursor.execute(cmd)
         print('""" create users """')
