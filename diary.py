@@ -75,7 +75,9 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
             line_bot_api.reply_message(tk, img_message)
             os.system(f'rm {img_url[1]}')
 
-            first_time = save_mood(userID, mood, folder)
+            save_mood(userID, mood, folder)
+
+            first_time = read_data('users', 'first_time', userID)
             if first_time:
                 print('""" first time diary """')
                 text_message = TextSendMessage(text='第一篇日記完成了～以後每天都可以來這裡，記下獨屬於你的心情喔😊\n\n（在我們的相簿裡，可以找到每天的日記，是屬於我們的日記本📗）')
