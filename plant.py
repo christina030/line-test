@@ -82,7 +82,7 @@ def grow_plant(tk, mood_score, folder):
     
     img = cv2.imread(os.path.join(folder, img_name[0]), cv2.IMREAD_UNCHANGED)
 
-    for i, mood in enumerate(mood_score[:mood_scores.index(None)-1]):
+    for i, mood in enumerate(mood_score[:mood_score.index(None)-1]):
         ############################################################
         # img2 = cv2.imread(os.path.join(folder, img_name[1][i]), cv2.IMREAD_UNCHANGED)
         # if mood is None:
