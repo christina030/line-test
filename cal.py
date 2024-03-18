@@ -8,7 +8,7 @@
 # from datetime import datetime as dt
 # import cv2
 # import numpy as np
-from linebot.models import TextSendMessage, ImageSendMessage    # 載入 TextSendMessage 和 ImageSendMessage 模組
+from linebot.models import TextSendMessage    # 載入 TextSendMessage 和 ImageSendMessage 模組
 
 # from rep import modify_val, read_data
 
