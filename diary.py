@@ -110,9 +110,9 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
     # if action_done[userID] == today:
     #     return
     # else:
-    if action_done is None or action_done[0] != today:
+    if action_done[0] is None or action_done[0] != today:
     # if action_done is None or dt.strptime(action_done[0], '%Y-%m-%d') != today:
-        if action_done is None:
+        if action_done[0] is None:
             first_time = True
             
         print('""" today not done """')
