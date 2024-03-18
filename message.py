@@ -5,7 +5,7 @@ import os
 
 from diary import handle_diary
 from plant import handle_grow
-from calendar import handle_calendar
+from cal import handle_calendar
 from user import check_and_save_user
 from rep import add_row, modify_val, read_data, delete_row
 
