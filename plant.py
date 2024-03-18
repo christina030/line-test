@@ -14,7 +14,7 @@ from imgur import glucose_graph
 from rep import modify_val, read_data
 
 
-grow_days = [5, 10, 20, 30]
+grow_days = [5, 10, 20]#, 30]
 mood_ranges = [[8, 16], [10, 20], [20, 40], [20, 40]]
 
 def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', mood_filename='mood_scores.pkl'):
@@ -80,26 +80,26 @@ def grow_plant(tk, mood_score, folder):
          '4-3.png']
     ]
     
-    img = cv2.imread(os.path.join('shared', img_name[0]), cv2.IMREAD_UNCHANGED)
+    img = cv2.imread(os.path.join(folder, img_name[0]), cv2.IMREAD_UNCHANGED)
 
     for i, mood in enumerate(mood_score[:-1]):
         ############################################################
-        img2 = cv2.imread(os.path.join('shared', img_name[1][i]), cv2.IMREAD_UNCHANGED)
-        # if mood is None:
-        #     break
-        # if mood < mood_ranges[i][0]:
-        #     img2 = cv2.imread(os.path.join('shared', img_name[1][i]), cv2.IMREAD_UNCHANGED)
-        # elif mood < mood_ranges[i][1]:
-        #     img2 = cv2.imread(os.path.join('shared', img_name[2][i]), cv2.IMREAD_UNCHANGED)
-        # else:
-        #     img2 = cv2.imread(os.path.join('shared', img_name[3][i]), cv2.IMREAD_UNCHANGED)
+        # img2 = cv2.imread(os.path.join(folder, img_name[1][i]), cv2.IMREAD_UNCHANGED)
+        if mood is None:
+            break
+        if mood < mood_ranges[i][0]:
+            img2 = cv2.imread(os.path.join(folder, img_name[1][i]), cv2.IMREAD_UNCHANGED)
+        elif mood < mood_ranges[i][1]:
+            img2 = cv2.imread(os.path.join(folder, img_name[2][i]), cv2.IMREAD_UNCHANGED)
+        else:
+            img2 = cv2.imread(os.path.join(folder, img_name[3][i]), cv2.IMREAD_UNCHANGED)
         ############################################################
 
         # img[img2 != [0, 0, 0]] = img2[img2 != [0, 0, 0]]
         alpha = np.transpose(np.tile(img2[:, :, -1], (3, 1, 1)), (1, 2, 0)) / 255.
         img[:, :, :-1] = img[:, :, :-1] * (1 - alpha) + img2[:, :, :-1] * alpha
 
-    imgSavePath = os.path.join('shared', tk + '_plant.jpg')
+    imgSavePath = os.path.join(folder, tk + '_plant.jpg')
     cv2.imwrite(imgSavePath, img)
 
     img_url = glucose_graph(imgSavePath)
