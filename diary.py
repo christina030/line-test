@@ -75,7 +75,15 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
             line_bot_api.reply_message(tk, img_message)
             os.system(f'rm {img_url[1]}')
 
-            save_mood(userID, mood, folder)
+            first_time = save_mood(userID, mood, folder)
+            if first_time:
+                text_message = TextSendMessage(text='第一篇日記完成了～以後每天都可以來這裡，記下獨屬於你的心情喔😊')
+                line_bot_api.reply_message(tk, text_message)
+                text_message = TextSendMessage(text='在我們的相簿裡，可以找到每天的日記，是屬於我們的日記本📗')
+                line_bot_api.reply_message(tk, text_message)
+                text_message = TextSendMessage(text='記下了心情之後，回去看看我們小種子吧！\n\n請輸入「月亮種子」，或點選下方小雲朵選單中的月亮種子圖示。')
+                line_bot_api.reply_message(tk, text_message)
+                
         else:
             # 如果是 False，回傳文字
             text_message = TextSendMessage(text='找不到相關日記圖片')
@@ -97,11 +105,17 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
     #     action_done = pickle.load(f)
 
     today = datetime.date.today()
+
+    first_time = False
+    
     # if action_done[userID] == today:
     #     return
     # else:
     if action_done is None or action_done[0] != today:
     # if action_done is None or dt.strptime(action_done[0], '%Y-%m-%d') != today:
+        if action_done is None:
+            first_time = True
+            
         print('""" today not done """')
         # action_done[userID] = today
         # with open(os.path.join(folder, action_filename), 'wb') as f:
@@ -126,3 +140,5 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
         modify_val('scores', [f'score{mood_scores.index(None)}'], [new_score], userID)
         # with open(os.path.join(folder, mood_filename), 'wb') as f:
         #     pickle.dump(mood_scores, f)
+
+    return first_time
