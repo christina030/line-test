@@ -40,7 +40,7 @@ def check_and_save_user(userID, folder):#, user_filename='users.pkl', mood_filen
 
     # with open(os.path.join(folder, mood_filename), 'wb') as f:
     #     pickle.dump(mood_scores, f)
-    add_row('scores', '(user_id, score1)', (userID, 0))
+    add_row('scores', '(user_id, score1, score2, score3, score4, score5)', (userID, 0, 0, 0, 0, 0, 0))
 
     # action done file
     # action_done = None
