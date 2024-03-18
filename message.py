@@ -2,6 +2,7 @@
 
 import pickle
 import os
+from linebot.models import TextSendMessage
 
 from diary import *
 from plant import *
@@ -69,4 +70,11 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
         handle_calendar(tk, userID, line_bot_api, folder)
 
     elif '我想取名為' in text:
-        handle_plant_name(tk, userID, line_bot_api)
+        s = text.find('[')
+        e = text.rindex(']')
+        if s == -1 or e == -1:
+            text_message = TextSendMessage(text='請保留[]')
+            line_bot_api.reply_message(tk, text_message)
+        else:            
+            name = text[s+1: e]
+            handle_plant_name(tk, userID, name, line_bot_api)
