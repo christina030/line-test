@@ -40,16 +40,26 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
     days = (today - user_date[0]).days
     # days = (today - dt.strptime(user_date[0], '%Y-%m-%d')).days
 
-    if days in grow_days:
+    # if days in grow_days:
         # mood_scores[userID].append(0)
 
         # with open(os.path.join(folder, mood_filename), 'wb') as f:
         #     pickle.dump(mood_scores, f)
-        modify_val('scores', [f'score{mood_scores.index(None)+1}'], [0], userID)
+        # modify_val('scores', [f'score{mood_scores.index(None)+1}'], [0], userID)
+    stage = 0
+    if days >= grow_days[2]:
+        stage = 3
+        modify_val('scores', ['stage'], [stage], userID)
+    elif days >= grow_days[1]:
+        stage = 2
+        modify_val('scores', ['stage'], [stage], userID)
+    elif days >= grow_days[0]:
+        stage = 1
+        modify_val('scores', ['stage'], [stage], userID)
 
     print(f'""" 第{days}天 """', userID)
     ############################################################
-    img_url = grow_plant(tk, mood_scores, folder)   # 取得對應的圖片，如果沒有取得，會是 False
+    img_url = grow_plant(tk, mood_scores, stage, folder)   # 取得對應的圖片，如果沒有取得，會是 False
     print(img_url)
     if img_url:
         # 如果有圖片網址，回傳圖片
@@ -69,7 +79,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
     ############################################################
 
 
-def grow_plant(tk, mood_score, folder):
+def grow_plant(tk, mood_scores, stage, folder):
     img_name = [
         '0.png',
         ['1-1.png',
@@ -88,7 +98,7 @@ def grow_plant(tk, mood_score, folder):
     
     img = cv2.imread(os.path.join(folder, img_name[0]), cv2.IMREAD_UNCHANGED)
 
-    for i, mood in enumerate(mood_score[:mood_score.index(None)-1]):
+    for i, mood in enumerate(mood_scores[:stage]):
         ############################################################
         # img2 = cv2.imread(os.path.join(folder, img_name[1][i]), cv2.IMREAD_UNCHANGED)
         # if mood is None:
