@@ -72,6 +72,7 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
         if img_url:
             # 如果有圖片網址，回傳圖片
             img_message = ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0])
+            print(tk)
             line_bot_api.reply_message(tk, img_message)
             os.system(f'rm {img_url[1]}')
 
@@ -81,6 +82,7 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
             if first_time:
                 print('""" first time diary """')
                 text_message = TextSendMessage(text='第一篇日記完成了～以後每天都可以來這裡，記下獨屬於你的心情喔😊\n\n（在我們的相簿裡，可以找到每天的日記，是屬於我們的日記本📗）')
+                print(tk)
                 line_bot_api.reply_message(tk, text_message)
                 text_message = TextSendMessage(text='記下了心情之後，回去看看我們小種子吧！\n\n（請輸入「月亮種子」，或點選下方小雲朵選單中的月亮種子圖示。）')
                 line_bot_api.reply_message(tk, text_message)
