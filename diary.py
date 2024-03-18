@@ -84,7 +84,7 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
                 
         else:
             # 如果是 False，回傳文字
-            text_message = TextSendMessage(text='找不到相關日記圖片')
+            text_message = TextSendMessage(text='非常抱歉，心情日記功能目前出現異常，如遇到問題請回報，我們會盡快修復！')
             line_bot_api.reply_message(tk, text_message)
         ############################################################
     else:
