@@ -46,7 +46,8 @@ def create_tables():
         cmd = '''CREATE TABLE users(
            user_id VARCHAR (50) NOT NULL,
            first_date DATE NOT NULL,
-           first_time BOOL NOT NULL
+           first_time BOOL NOT NULL,
+           plant_name VARCHAR (31) NOT NULL
         );'''
         cursor.execute(cmd)
         print('""" create users """')
