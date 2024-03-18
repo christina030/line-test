@@ -121,7 +121,7 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
         modify_val('actions', ['done_date'], [today.strftime('%Y-%m-%d')], userID)
 
         # change mood score
-        mood_scores = read_data('scores', 'score1, score2, score3, score4, score5', userID)
+        mood_scores = read_data('scores', 'score1, score2, score3, score4, score5, stage', userID)
         print('"""\nscores:')
         print(mood_scores)
         print(type(mood_scores))
@@ -130,12 +130,12 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
         # with open(os.path.join(folder, mood_filename), 'rb') as f:
         #     mood_scores = pickle.load(f)
 
-        new_score = mood_scores[mood_scores.index(None)-1] + (mood + 1)
+        new_score = mood_scores[mood_scores[-1]] + (mood + 1)
         print(userID, '分數：', new_score)
         # mood_scores[userID][-1] += (mood + 1)
         # print(userID, '分數：', mood_scores[userID][-1])
 
-        modify_val('scores', [f'score{mood_scores.index(None)}'], [new_score], userID)
+        modify_val('scores', [f'score{mood_scores[-1]+1}'], [new_score], userID)
         # with open(os.path.join(folder, mood_filename), 'wb') as f:
         #     pickle.dump(mood_scores, f)
 
