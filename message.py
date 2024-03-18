@@ -69,6 +69,9 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
     elif text == 'change-to-calendar' or text == '專屬月曆':
         handle_calendar(tk, userID, line_bot_api, folder)
 
+    elif text == 'change-to-diary' or text == '專屬月曆':
+        handle_change_to_diary(tk, userID, line_bot_api)
+
     elif '我想取名為' in text:
         s = text.find('[')
         e = text.rindex(']')
