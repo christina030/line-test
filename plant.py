@@ -129,3 +129,10 @@ def grow_plant(tk, mood_scores, stage, folder):
     else:
       # 如果找不到對應的圖片，回傳 False
       return False
+
+def handle_plant_name(tk, userID, name, line_bot_api):
+    modify_val('users', ['plant_name'], [name], userID)
+    
+    text_message = TextSendMessage(text=f'種子已被命名成[{name}]囉！')
+    line_bot_api.reply_message(tk, text_message)
+    
