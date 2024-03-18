@@ -136,3 +136,14 @@ def handle_plant_name(tk, userID, name, line_bot_api):
     text_message = TextSendMessage(text=f'種子已被命名成[{name}]囉！')
     line_bot_api.reply_message(tk, text_message)
     
+    first_time = read_data('users', 'first_time', userID)
+    if first_time:
+        text_message = TextSendMessage(text='接下來，讓我們共同度過這段值得珍惜的日子。好好照顧自己，我會在這裡陪伴你❤️')
+        line_bot_api.reply_message(tk, text_message)
+
+        imgSavePath = os.path.join(folder, '2.png')
+        img_url = glucose_graph(imgSavePath)
+        img_message = ImageSendMessage(original_content_url=img_url, preview_image_url=img_url)
+        line_bot_api.reply_message(tk, img_message)
+        
+        modify_val('users', ['first_time'], [False], userID)
