@@ -56,6 +56,12 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
         img_message = ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0])
         line_bot_api.reply_message(tk, img_message)
         os.system(f'rm {img_url[1]}')
+
+        first_time = read_data('users', 'first_time', userID)
+        if first_time:
+            text_message = TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～')
+            line_bot_api.reply_message(tk, text_message)
+            
     else:
         # 如果是 False，回傳文字
         text_message = TextSendMessage(text='找不到相關植栽圖片')
