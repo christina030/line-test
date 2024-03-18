@@ -66,7 +66,8 @@ def create_tables():
            score2 SMALLINT,
            score3 SMALLINT,
            score4 SMALLINT,
-           score5 SMALLINT
+           score5 SMALLINT, 
+           stage SMALLINT NOT NULL
         );'''
         cursor.execute(cmd)
         print('""" create scores """')
