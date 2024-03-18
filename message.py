@@ -3,11 +3,11 @@
 import pickle
 import os
 
-from diary import handle_diary
-from plant import handle_grow
-from cal import handle_calendar
-from user import check_and_save_user
-from rep import add_row, modify_val, read_data, delete_row
+from diary import *
+from plant import *
+from cal import *
+from user import *
+from rep import *
 
 
 diary_mood = ['action=diary&mood=1', 'action=diary&mood=2', 'action=diary&mood=3', 'action=diary&mood=4', 'action=diary&mood=5', 'action=diary&mood=6']
@@ -67,3 +67,6 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
 
     elif text == 'change-to-calendar' or text == '專屬月曆':
         handle_calendar(tk, userID, line_bot_api, folder)
+
+    elif '我想取名為' in text:
+        handle_plant_name(tk, userID, line_bot_api)
