@@ -63,10 +63,10 @@ def create_tables():
         cmd = '''CREATE TABLE scores(
            user_id VARCHAR (50) NOT NULL,
            score1 SMALLINT NOT NULL,
-           score2 SMALLINT,
-           score3 SMALLINT,
-           score4 SMALLINT,
-           score5 SMALLINT, 
+           score2 SMALLINT NOT NULL,
+           score3 SMALLINT NOT NULL,
+           score4 SMALLINT NOT NULL,
+           score5 SMALLINT NOT NULL,
            stage SMALLINT NOT NULL
         );'''
         cursor.execute(cmd)
