@@ -5,6 +5,7 @@ import os
 
 from diary import handle_diary
 from plant import handle_grow
+from calendar import handle_calendar
 from user import check_and_save_user
 from rep import add_row, modify_val, read_data, delete_row
 
@@ -61,5 +62,8 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
         #     pickle.dump(msgs, f)
 
     # elif text == 'change-to-plant':
-    elif text == 'change-to-plant' or text == '植栽':
+    elif text == 'change-to-plant' or text == '月亮種子':
         handle_grow(tk, userID, line_bot_api, folder)
+
+    elif text == 'change-to-calendar' or text == '專屬月曆':
+        handle_calendar(tk, userID, line_bot_api, folder)
