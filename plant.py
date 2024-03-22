@@ -69,7 +69,8 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
             reply_msgs.append(TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～'))
             # line_bot_api.reply_message(tk, text_message)
         else:
-            reply_msgs.append(TextSendMessage(text=' 🌧️💦💦🌱澆水啦～再等等[植栽名]長大吧！'))
+            plant_name = read_data('users', 'plant_name', userID)
+            reply_msgs.append(TextSendMessage(text=f' 🌧️💦💦🌱澆水啦～再等等[{plant_name}]長大吧！'))
             
         # 如果有圖片網址，回傳圖片
         reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
