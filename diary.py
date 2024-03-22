@@ -76,8 +76,6 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
             line_bot_api.reply_message(tk, img_message)
             os.system(f'rm {img_url[1]}')
 
-            save_mood(userID, mood, folder)
-
             first_time = read_data('users', 'first_time', userID)
             if first_time:
                 print('""" first time diary """')
@@ -86,6 +84,8 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
                 line_bot_api.reply_message(tk, text_message)
                 text_message = TextSendMessage(text='記下了心情之後，回去看看我們小種子吧！\n\n（請輸入「月亮種子」，或點選下方小雲朵選單中的月亮種子圖示。）')
                 line_bot_api.reply_message(tk, text_message)
+
+            save_mood(userID, mood, folder)
                 
         else:
             # 如果是 False，回傳文字
