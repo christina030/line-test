@@ -64,7 +64,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
     if img_url:
         reply_msgs = []
         
-        first_time = read_data('users', 'first_time', userID)
+        first_time = read_data('users', 'first_time', userID)[0]
         if first_time:
             reply_msgs.append(TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～'))
             # line_bot_api.reply_message(tk, text_message)
@@ -144,7 +144,7 @@ def handle_plant_name(tk, userID, name, line_bot_api, folder):
     reply_msgs.append(TextSendMessage(text=f'種子已被命名成［{name}］囉！'))
     # line_bot_api.reply_message(tk, text_message)
     
-    first_time = read_data('users', 'first_time', userID)
+    first_time = read_data('users', 'first_time', userID)[0]
     print('"""\nusers first:')
     print(first_time)
     print(type(first_time))
@@ -157,6 +157,6 @@ def handle_plant_name(tk, userID, name, line_bot_api, folder):
         img_url = glucose_graph(imgSavePath)
         reply_msgs.append(ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
         
-        modify_val('users', ['first_time'], [0], userID)
+        modify_val('users', ['first_time'], [False], userID)
         
     line_bot_api.reply_message(tk, reply_msgs)
