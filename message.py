@@ -73,10 +73,10 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
         handle_change_to_diary(tk, userID, line_bot_api)
 
     elif '我想取名為' in text:
-        s = text.find('[')
-        e = text.rfind(']')
-        if s == -1 or e == -1:
-            text_message = TextSendMessage(text='請保留[]')
+        s = text.find('[') + text.find('［')
+        e = text.rfind(']') + text.rfind('］')
+        if s < 0 or e < 0:
+            text_message = TextSendMessage(text='請保留［］')
             line_bot_api.reply_message(tk, text_message)
         else:            
             name = text[s+1: e]
