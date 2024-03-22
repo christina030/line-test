@@ -62,19 +62,24 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
     img_url = grow_plant(tk, mood_scores, stage, folder)   # 取得對應的圖片，如果沒有取得，會是 False
     print(img_url)
     if img_url:
+        reply_msgs = []
+        
         first_time = read_data('users', 'first_time', userID)
         if first_time:
-            text_message = TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～')
-            line_bot_api.reply_message(tk, text_message)
+            reply_msgs.append(TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～'))
+            # line_bot_api.reply_message(tk, text_message)
+        else:
+            reply_msgs.append(TextSendMessage(text=' 🌧️💦💦🌱澆水啦～再等等[植栽名]長大吧！'))
             
         # 如果有圖片網址，回傳圖片
-        img_message = ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0])
-        line_bot_api.reply_message(tk, img_message)
+        reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
+        # line_bot_api.reply_message(tk, img_message)
         os.system(f'rm {img_url[1]}')
 
         if first_time:
-            text_message = TextSendMessage(text='哇！發芽了～\n種子的成長，會隨著每天記錄的心情月亮，產生不同變化，長成屬於你獨一而二的樣貌。\n讓我們一起期待，為你的小生命取個名字吧～\n\n（請輸入「我想取名為[]」。[]中為你想取的名字，若之後想再更換名字，可以同樣輸入此訊息喔～）')
-            line_bot_api.reply_message(tk, text_message)
+            reply_msgs.append(TextSendMessage(text='哇！發芽了～\n種子的成長，會隨著每天記錄的心情月亮，產生不同變化，長成屬於你獨一而二的樣貌。\n讓我們一起期待，為你的小生命取個名字吧～\n\n（請輸入「我想取名為[]」。[]中為你想取的名字，若之後想再更換名字，可以同樣輸入此訊息喔～）'))
+        
+        line_bot_api.reply_message(tk, text_message)
             
     else:
         # 如果是 False，回傳文字
@@ -132,18 +137,21 @@ def grow_plant(tk, mood_scores, stage, folder):
 
 def handle_plant_name(tk, userID, name, line_bot_api):
     modify_val('users', ['plant_name'], [name], userID)
+
+    reply_msgs = []
     
-    text_message = TextSendMessage(text=f'種子已被命名成[{name}]囉！')
-    line_bot_api.reply_message(tk, text_message)
+    reply_msgs.append(TextSendMessage(text=f'種子已被命名成[{name}]囉！'))
+    # line_bot_api.reply_message(tk, text_message)
     
     first_time = read_data('users', 'first_time', userID)
     if first_time:
-        text_message = TextSendMessage(text='接下來，讓我們共同度過這段值得珍惜的日子。好好照顧自己，我會在這裡陪伴你❤️')
-        line_bot_api.reply_message(tk, text_message)
+        reply_msgs.append(TextSendMessage(text='接下來，讓我們共同度過這段值得珍惜的日子。好好照顧自己，我會在這裡陪伴你❤️'))
+        # line_bot_api.reply_message(tk, text_message)
 
         imgSavePath = os.path.join(folder, '2.png')
         img_url = glucose_graph(imgSavePath)
-        img_message = ImageSendMessage(original_content_url=img_url, preview_image_url=img_url)
-        line_bot_api.reply_message(tk, img_message)
+        reply_msgs.append(ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
         
         modify_val('users', ['first_time'], [False], userID)
+        
+    line_bot_api.reply_message(tk, reply_msgs)
