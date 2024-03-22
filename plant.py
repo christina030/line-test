@@ -136,7 +136,7 @@ def grow_plant(tk, mood_scores, stage, folder):
       # 如果找不到對應的圖片，回傳 False
       return False
 
-def handle_plant_name(tk, userID, name, line_bot_api):
+def handle_plant_name(tk, userID, name, line_bot_api, folder):
     modify_val('users', ['plant_name'], [name], userID)
 
     reply_msgs = []
