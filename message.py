@@ -83,7 +83,7 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
                 line_bot_api.reply_message(tk, text_message)
             else:
                 name = text[s+1: e]
-                handle_plant_name(tk, userID, name, line_bot_api)
+                handle_plant_name(tk, userID, name, line_bot_api, folder)
         else:
             name = text[s+1: e]
-            handle_plant_name(tk, userID, name, line_bot_api)
+            handle_plant_name(tk, userID, name, line_bot_api, folder)
