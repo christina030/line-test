@@ -80,7 +80,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
         if first_time:
             reply_msgs.append(TextSendMessage(text='哇！發芽了～\n種子的成長，會隨著每天記錄的心情月亮，產生不同變化，長成屬於你獨一而二的樣貌。\n讓我們一起期待，為你的小生命取個名字吧～\n\n（請輸入「我想取名為[]」。[]中為你想取的名字，若之後想再更換名字，可以同樣輸入此訊息喔～）'))
         
-        line_bot_api.reply_message(tk, text_message)
+        line_bot_api.reply_message(tk, reply_msgs)
             
     else:
         # 如果是 False，回傳文字
