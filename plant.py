@@ -18,7 +18,7 @@ grow_days = [5, 10, 20]#, 30]
 mood_ranges = [[8, 16], [10, 20], [20, 40], [20, 40]]
 
 def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', mood_filename='mood_scores.pkl'):
-    user_date = read_data('users', 'first_date', userID)
+    user_date = read_data('users', 'first_date', userID)[0]
     print('"""\nusers date:')
     print(user_date)
     print(type(user_date))
@@ -37,7 +37,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
     today = datetime.date.today()
     # days = (today - users[userID]).days
-    days = (today - user_date[0]).days
+    days = (today - user_date).days
     # days = (today - dt.strptime(user_date[0], '%Y-%m-%d')).days
 
     # if days in grow_days:
@@ -69,7 +69,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
             reply_msgs.append(TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～'))
             # line_bot_api.reply_message(tk, text_message)
         else:
-            plant_name = read_data('users', 'plant_name', userID)
+            plant_name = read_data('users', 'plant_name', userID)[0]
             reply_msgs.append(TextSendMessage(text=f' 🌧️💦💦🌱澆水啦～再等等［{plant_name}］長大吧！'))
             
         # 如果有圖片網址，回傳圖片
