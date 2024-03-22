@@ -145,6 +145,10 @@ def handle_plant_name(tk, userID, name, line_bot_api, folder):
     # line_bot_api.reply_message(tk, text_message)
     
     first_time = read_data('users', 'first_time', userID)
+    print('"""\nusers first:')
+    print(first_time)
+    print(type(first_time))
+    print('"""')
     if first_time:
         reply_msgs.append(TextSendMessage(text='接下來，讓我們共同度過這段值得珍惜的日子。好好照顧自己，我會在這裡陪伴你❤️'))
         # line_bot_api.reply_message(tk, text_message)
