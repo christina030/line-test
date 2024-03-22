@@ -76,7 +76,7 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
             # line_bot_api.reply_message(tk, img_message)
             os.system(f'rm {img_url[1]}')
  
-            first_time = read_data('users', 'first_time', userID)
+            first_time = read_data('users', 'first_time', userID)[0]
             if first_time:
                 print('""" first time diary """')
                 reply_msgs.append(TextSendMessage(text='第一篇日記完成了～以後每天都可以來這裡，記下獨屬於你的心情喔😊\n\n（在我們的相簿裡，可以找到每天的日記，是屬於我們的日記本📗）'))
@@ -98,7 +98,7 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
 
 def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_filename='action_done.pkl'):
     # check if action done
-    action_done = read_data('actions', 'done_date', userID)
+    action_done = read_data('actions', 'done_date', userID)[0]
     print('"""\nactions:')
     print(action_done)
     print(type(action_done))
@@ -109,16 +109,11 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
 
     today = datetime.date.today()
 
-    first_time = False
-    
     # if action_done[userID] == today:
     #     return
     # else:
-    if action_done[0] is None or action_done[0] != today:
-    # if action_done is None or dt.strptime(action_done[0], '%Y-%m-%d') != today:
-        if action_done[0] is None:
-            first_time = True
-            
+    if action_done is None or action_done != today:
+    # if action_done is None or dt.strptime(action_done[0], '%Y-%m-%d') != today:  
         print('""" today not done """')
         # action_done[userID] = today
         # with open(os.path.join(folder, action_filename), 'wb') as f:
@@ -144,10 +139,8 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
         # with open(os.path.join(folder, mood_filename), 'wb') as f:
         #     pickle.dump(mood_scores, f)
 
-    return first_time
-
 def handle_change_to_diary(tk, userID, line_bot_api):
-    first_time = read_data('users', 'first_time', userID)
+    first_time = read_data('users', 'first_time', userID)[0]
     if first_time:
         text_message = TextSendMessage(text='今天過得如何呢？🌑🌒🌓🌔🌕\n心情就像月亮一樣，會有陰晴圓缺。也許心情如月蝕🌑般灰濛濛的，又或許充盈如滿月🌕，不確定的心情就像是月亮被雲☁️遮住，看不出陰晴。無論如何，都是屬於這一天美好的光照角度。\n👇點擊今天的心情月亮形狀。')
         line_bot_api.reply_message(tk, text_message)
