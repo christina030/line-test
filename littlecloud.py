@@ -60,11 +60,11 @@ def handle_littlecloud(userID, line_bot_api):
                 )
         ))
 
-def handle_help(tk, userID, line_bot_api):
+def handle_help(tk, line_bot_api):
         text_message = TextSendMessage(text=help_str)
         line_bot_api.reply_message(tk, text_message)
   
-def handle_chat(tk, userID, line_bot_api):
+def handle_chat(tk, line_bot_api):
         chat_str = random.choice(chat_list)
         text_message = TextSendMessage(text=chat_str)
         line_bot_api.reply_message(tk, text_message)
