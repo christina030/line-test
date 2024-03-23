@@ -55,7 +55,8 @@ def create_tables():
     if not table_exists(cursor, 'actions'):
         cmd = '''CREATE TABLE actions(
            user_id VARCHAR (50) NOT NULL,
-           done_date DATE
+           done_date DATE,
+           plant_done_date DATE
         );'''
         cursor.execute(cmd)
         print('""" create actions """')
