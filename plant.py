@@ -65,7 +65,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
         if days >= 30:
             reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
-            os.system(f'rm {img_url[1]}')
+            # os.system(f'rm {img_url[1]}')
             
             plant_name = read_data('users', 'plant_name', userID)[0]
             reply_msgs.append(TextSendMessage(text=f'我們的旅程已經走到了第 30 天，謝謝你的悉心照料。［{plant_name}］生長完成了！\n能在你的呵護裡，陪你一起走過一段，［{plant_name}］覺得很幸福❤️。'))
@@ -99,14 +99,15 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
             # 如果有圖片網址，回傳圖片
             reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
             # line_bot_api.reply_message(tk, img_message)
-            os.system(f'rm {img_url[1]}')
+            # os.system(f'rm {img_url[1]}')
     
             if first_time:
                 reply_msgs.append(TextSendMessage(text='哇！發芽了～\n種子的成長，會隨著每天記錄的心情月亮，產生不同變化，長成屬於你獨一而二的樣貌。\n讓我們一起期待，為你的小生命取個名字吧～'))
                 reply_msgs.append(TextSendMessage(text='請輸入：我想取名為［］\n（［］中為你想取的名字，若之後想再更換名字，可以同樣輸入此訊息喔～）'))
         
         line_bot_api.reply_message(tk, reply_msgs)
-            
+        os.system(f'rm {img_url[1]}')
+        
     else:
         # 如果是 False，回傳文字
         text_message = TextSendMessage(text='非常抱歉，月亮種子功能目前出現異常，如遇到問題請回報，我們會盡快修復！')
