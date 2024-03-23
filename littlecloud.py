@@ -8,6 +8,7 @@
 # from datetime import datetime as dt
 # import cv2
 # import numpy as np
+import random
 from linebot.models import TextSendMessage    # 載入 TextSendMessage 和 ImageSendMessage 模組
 from linebot.models import MessageAction, TemplateSendMessage, ConfirmTemplate
 
@@ -27,8 +28,21 @@ help_str = '''嗨～我是小雲朵，歡迎來到屬於我們的空間。
 30天後，月亮種子將長成屬於您這段旅程的模樣，紀念你我相伴的這段時光。
 我們的旅程也將告一段落，期望您帶著小雲朵的祝褔，去往下一段美好篇章。'''
 
+chat_list = [
+        '注意休息，好好照顧自己唷！',
+        '不論今天過得如何，都要記得留一些時間給自己。',
+        '親愛的你，希望你今天一切都好～',
+        '記得吃飽睡好～幫我好好照顧自己。',
+        '有空的話，就做一些讓自己放鬆的事情吧♬',
+        '親愛的你，記得給自己多一點溫柔和呵護，讓每一天都有個有個美好的開始～',
+        '記得保持輕鬆心情，讓自己的心靈得到療癒。吃飯時可以選擇一些有助於身體調理的食材哦！',
+        '如果你感到疲倦，不要勉強自己，多休息一會兒吧～保護好自己的身心健康是最重要的。',
+        '不論今天過得如何，記得給自己一個機會去哀悼、去釋放心中的情緒。',
+        '親愛的你，入夜之時，可以用香氛精油和舒緩的聲音，幫助你進入安穩的睡眠。'
+]
 
-def handle_littlecloud(tk, userID, line_bot_api, folder):
+
+def handle_littlecloud(userID, line_bot_api):
         line_bot_api.push_message(userID, TemplateSendMessage(
             alt_text='ConfirmTemplate',
             template=ConfirmTemplate(
@@ -36,15 +50,22 @@ def handle_littlecloud(tk, userID, line_bot_api, folder):
                     actions=[
                         MessageAction(
                             label='聊天',
-                            text='聊天'
+                            text='來聊一聊吧～'
                         ),
                         MessageAction(
                             label='幫助',
-                            text='幫助'
+                            text='我需要幫助～'
                         )
                     ]
                 )
         ))
-        # text_message = TextSendMessage(text=help_str)
-        # line_bot_api.reply_message(tk, text_message)
+
+def handle_help(tk, userID, line_bot_api):
+        text_message = TextSendMessage(text=help_str)
+        line_bot_api.reply_message(tk, text_message)
+  
+def handle_chat(tk, userID, line_bot_api):
+        chat_str = random.choice(chat_list)
+        text_message = TextSendMessage(text=chat_str)
+        line_bot_api.reply_message(tk, text_message)
   
