@@ -65,7 +65,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
         if days >= 30:
             reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
-            os.system(f'rm {img_url[1]}')
+            # os.system(f'rm {img_url[1]}')
             
             plant_name = read_data('users', 'plant_name', userID)[0]
             reply_msgs.append(TextSendMessage(text=f'我們的旅程已經走到了第 30 天，謝謝你的悉心照料。［{plant_name}］生長完成了！\n能在你的呵護裡，陪你一起走過一段，［{plant_name}］覺得很幸福❤️。'))
@@ -75,8 +75,7 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
             reply_msgs.append(ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
         
             reply_msgs.append(TextSendMessage(text=f'完成旅程的［{plant_name}］，化作一顆溫柔的星，住進夜空裡守護你。\n謝謝你，是你的堅強和柔軟，讓我們一起走過。'))
-            reply_msgs.append(TextSendMessage(text='這段旅程告一段落，我深深地祝福你，一切願望都能成真。\n你可以帶上回憶，離開這裡去往你的人生新篇。\n也可以繼續留下來和我們一起，種下一顆新種子，再度守護種子成長，種成一片屬於你的秘密花園。\n無論你在哪裡，這裡永遠歡迎你。'))
-            reply_msgs.append(TextSendMessage(text='如果你想要再一起種下一顆新種子，請輸入：種下新的種子！'))
+            reply_msgs.append(TextSendMessage(text='這段旅程告一段落，我深深地祝福你，一切願望都能成真。\n你可以帶上回憶，離開這裡去往你的人生新篇。\n也可以繼續留下來和我們一起，種下一顆新種子，再度守護種子成長，種成一片屬於你的秘密花園。\n無論你在哪裡，這裡永遠歡迎你。\n\n（如果你想要再一起種下一顆新種子，請輸入：種下新的種子！）'))
 
         else:
             first_time = read_data('users', 'first_time', userID)[0]
@@ -100,13 +99,14 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
             # 如果有圖片網址，回傳圖片
             reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
             # line_bot_api.reply_message(tk, img_message)
-            os.system(f'rm {img_url[1]}')
+            # os.system(f'rm {img_url[1]}')
     
             if first_time:
                 reply_msgs.append(TextSendMessage(text='哇！發芽了～\n種子的成長，會隨著每天記錄的心情月亮，產生不同變化，長成屬於你獨一而二的樣貌。\n讓我們一起期待，為你的小生命取個名字吧～'))
                 reply_msgs.append(TextSendMessage(text='請輸入：我想取名為［］\n（［］中為你想取的名字，若之後想再更換名字，可以同樣輸入此訊息喔～）'))
         
         line_bot_api.reply_message(tk, reply_msgs)
+        os.system(f'rm {img_url[1]}')
         
     else:
         # 如果是 False，回傳文字
