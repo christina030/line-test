@@ -69,8 +69,18 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
             reply_msgs.append(TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～'))
             # line_bot_api.reply_message(tk, text_message)
         else:
+            action_done = read_data('actions', 'plant_done_date', userID)[0]
             plant_name = read_data('users', 'plant_name', userID)[0]
-            reply_msgs.append(TextSendMessage(text=f' 🌧️💦💦🌱澆水啦～再等等［{plant_name}］長大吧！'))
+            
+            today = datetime.date.today()
+        
+            if action_done != today: 
+                print('""" today not plant done """')
+                modify_val('actions', ['plant_done_date'], [today.strftime('%Y-%m-%d')], userID)
+        
+                reply_msgs.append(TextSendMessage(text=f'🌧️💦💦🌱澆水啦～再等等［{plant_name}］長大吧！'))
+            else:
+                reply_msgs.append(TextSendMessage(text=f'今日份澆水已完成！明天再來幫［{plant_name}］澆水吧～☺️'))
             
         # 如果有圖片網址，回傳圖片
         reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
@@ -91,19 +101,19 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
 
 def grow_plant(tk, mood_scores, stage, folder):
     img_name = [
-        '0.png',
-        ['1-1.png',
-         '2-1.png',
-         '3-1.png',
-         '4-1.png'],
-        ['1-2.png',
-         '2-2.png',
-         '3-2.png',
-         '4-2.png'],
-        ['1-3.png',
-         '2-3.png',
-         '3-3.png',
-         '4-3.png']
+        '0.PNG',
+        ['1-1.PNG',
+         '2-1.PNG',
+         '3-1.PNG',
+         '4-1.PNG'],
+        ['1-2.PNG',
+         '2-2.PNG',
+         '3-2.PNG',
+         '4-2.PNG'],
+        ['1-3.PNG',
+         '2-3.PNG',
+         '3-3.PNG',
+         '4-3.PNG']
     ]
     
     img = cv2.imread(os.path.join(folder, img_name[0]), cv2.IMREAD_UNCHANGED)
