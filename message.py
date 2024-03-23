@@ -77,10 +77,10 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
     elif text == 'change-to-help' or text == '小雲朵':
         handle_littlecloud(userID, line_bot_api)
 
-    elif text == '來聊一聊吧～':
+    elif text == '我有問題':
         handle_chat(tk, line_bot_api)
 
-    elif text == '我需要幫助～':
+    elif text == '小雲朵介紹':
         handle_help(tk, line_bot_api)
 
     elif '我想取名為' in text:
