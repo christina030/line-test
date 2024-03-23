@@ -9,6 +9,7 @@
 # import cv2
 # import numpy as np
 from linebot.models import TextSendMessage    # 載入 TextSendMessage 和 ImageSendMessage 模組
+from linebot.models import MessageAction, TemplateSendMessage, ConfirmTemplate
 
 # from rep import modify_val, read_data
 
@@ -24,10 +25,26 @@ help_str = '''嗨～我是小雲朵，歡迎來到屬於我們的空間。
 【月亮種子】需要您每日澆水，就像我們希望您每日都好好照料自己。經過時日，月亮種子將依照您每日記錄下的心情月亮，每階段生長成不同的模樣。
 
 30天後，月亮種子將長成屬於您這段旅程的模樣，紀念你我相伴的這段時光。
-我們的旅程也將告一段落，期望您帶著小雲朵的祝褔，去往下一段美好篇章。
-'''
+我們的旅程也將告一段落，期望您帶著小雲朵的祝褔，去往下一段美好篇章。'''
+
 
 def handle_littlecloud(tk, userID, line_bot_api, folder):
-        text_message = TextSendMessage(text=help_str)
-        line_bot_api.reply_message(tk, text_message)
+        line_bot_api.push_message(userID, TemplateSendMessage(
+            alt_text='ConfirmTemplate',
+            template=ConfirmTemplate(
+                    text='哈囉～你要跟我聊天嗎？還是需要幫助呢？',
+                    actions=[
+                        MessageAction(
+                            label='聊天',
+                            text='聊天'
+                        ),
+                        MessageAction(
+                            label='幫助',
+                            text='幫助'
+                        )
+                    ]
+                )
+        ))
+        # text_message = TextSendMessage(text=help_str)
+        # line_bot_api.reply_message(tk, text_message)
   
