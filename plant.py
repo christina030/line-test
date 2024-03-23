@@ -75,8 +75,8 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
             reply_msgs.append(ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
         
             reply_msgs.append(TextSendMessage(text=f'完成旅程的［{plant_name}］，化作一顆溫柔的星，住進夜空裡守護你。\n謝謝你，是你的堅強和柔軟，讓我們一起走過。'))
-            reply_msgs.append(TextSendMessage(text=f'這段旅程告一段落，我深深地祝福你，一切願望都能成真。\n你可以帶上回憶，離開這裡去往你的人生新篇。\n也可以繼續留下來和我們一起，種下一顆新種子，再度守護種子成長，種成一片屬於你的秘密花園。\n無論你在哪裡，這裡永遠歡迎你。'))
-            reply_msgs.append(TextSendMessage(text=f'如果你想要再一起種下一顆新種子，請輸入：種下新的種子！'))
+            reply_msgs.append(TextSendMessage(text='這段旅程告一段落，我深深地祝福你，一切願望都能成真。\n你可以帶上回憶，離開這裡去往你的人生新篇。\n也可以繼續留下來和我們一起，種下一顆新種子，再度守護種子成長，種成一片屬於你的秘密花園。\n無論你在哪裡，這裡永遠歡迎你。'))
+            reply_msgs.append(TextSendMessage(text='如果你想要再一起種下一顆新種子，請輸入：種下新的種子！'))
 
         else:
             first_time = read_data('users', 'first_time', userID)[0]
