@@ -2,6 +2,7 @@
 
 import pickle
 import os
+import datetime
 from linebot.models import TextSendMessage
 
 from diary import *
@@ -99,5 +100,5 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
             handle_plant_name(tk, userID, name, line_bot_api, folder)
 
     elif text == '種下新的種子！':
-            modify_val('users', ['first_date'], [today.strftime('%Y-%m-%d')], userID)
+            modify_val('users', ['first_date'], [datetime.date.today().strftime('%Y-%m-%d')], userID)
             
