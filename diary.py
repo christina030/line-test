@@ -74,6 +74,7 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
             reply_msgs = []
             reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
             # line_bot_api.reply_message(tk, img_message)
+            os.system(f'rm {img_url[1]}')
  
             first_time = read_data('users', 'first_time', userID)[0]
             if first_time:
@@ -86,7 +87,6 @@ def handle_diary(tk, userID, text, mood, line_bot_api, folder):
             line_bot_api.reply_message(tk, reply_msgs)
 
             save_mood(userID, mood, folder)
-            os.system(f'rm {img_url[1]}')
                
         else:
             # 如果是 False，回傳文字
