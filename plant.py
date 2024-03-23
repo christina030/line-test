@@ -36,8 +36,8 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
     #     mood_scores = pickle.load(f)
 
     today = datetime.date.today()
-    # days = (today - user_date).days
-    days = 30
+    days = (today - user_date).days
+    # days = 30
 
     # if days in grow_days:
         # mood_scores[userID].append(0)
