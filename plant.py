@@ -186,3 +186,16 @@ def handle_plant_name(tk, userID, name, line_bot_api, folder):
         modify_val('users', ['first_time'], [False], userID)
         
     line_bot_api.reply_message(tk, reply_msgs)
+
+def handle_plant_new(tk, userID, line_bot_api, folder):
+    modify_val('users', ['first_date'], [datetime.date.today().strftime('%Y-%m-%d')], userID)
+
+    reply_msgs = []
+    
+    imgSavePath = os.path.join(folder, 'seed.png')
+    img_url = glucose_graph(imgSavePath)
+    reply_msgs.append(ImageSendMessage(original_content_url=img_url, preview_image_url=img_url))
+        
+    reply_msgs.append(TextSendMessage(text='已種下新的種子囉！'))
+
+    line_bot_api.reply_message(tk, reply_msgs)
