@@ -63,6 +63,9 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
         # with open(os.path.join(folder, msg_filename), 'wb') as f:
         #     pickle.dump(msgs, f)
 
+    elif text == 'change-to-diary':
+        handle_change_to_diary(tk, userID, line_bot_api)
+
     # elif text == 'change-to-plant':
     elif text == 'change-to-plant' or text == '月亮種子':
         handle_grow(tk, userID, line_bot_api, folder)
@@ -71,10 +74,13 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
         handle_calendar(tk, userID, line_bot_api, folder)
 
     elif text == 'change-to-help' or text == '小雲朵':
-        handle_littlecloud(tk, userID, line_bot_api, folder)
+        handle_littlecloud(userID, line_bot_api)
 
-    elif text == 'change-to-diary':
-        handle_change_to_diary(tk, userID, line_bot_api)
+    elif text == '來聊一聊吧～':
+        handle_chat(tk, line_bot_api)
+
+    elif text == '我需要幫助～':
+        handle_help(tk, line_bot_api)
 
     elif '我想取名為' in text:
         s = text.find('［')
