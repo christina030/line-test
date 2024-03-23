@@ -7,6 +7,7 @@ from linebot.models import TextSendMessage
 from diary import *
 from plant import *
 from cal import *
+from littlecloud import *
 from user import *
 from rep import *
 
@@ -69,7 +70,10 @@ def check_handle_message(event, line_bot_api, folder):#, msg_filename='msgs.pkl'
     elif text == 'change-to-calendar' or text == '專屬月曆':
         handle_calendar(tk, userID, line_bot_api, folder)
 
-    elif text == 'change-to-diary' or text == '專屬月曆':
+    elif text == 'change-to-help' or text == '小雲朵':
+        handle_littlecloud(tk, userID, line_bot_api, folder)
+
+    elif text == 'change-to-diary':
         handle_change_to_diary(tk, userID, line_bot_api)
 
     elif '我想取名為' in text:
