@@ -14,15 +14,15 @@ from rep import modify_val, read_data
 
 # 回覆圖片或影片訊息
 # 建立回覆圖片的函式
-def reply_img(tk, text, mood, folder, fontsize=72, color=(255,255,255), margin=20, linewidth=5, fontPath='used/CHENYULUOYAN-THIN-MONOSPACED.TTF'):
+def reply_img(tk, text, mood, folder, fontsize=72, color=(255,255,255), margin=20, linewidth=5, fontPath='shared/ChenYuluoyan-Thin-Monospaced.ttf'):
     # 文字對應圖片網址的字典
     img = [
-        'img1.jpg',
-        'img2.jpg',
-        'img3.jpg',
-        'img4.jpg',
-        'img5.jpg',
-        'img6.jpg'
+        'img1.png',
+        'img2.png',
+        'img3.png',
+        'img4.png',
+        'img5.png',
+        'img6.png'
     ]
 
     bg = cv2.imread(os.path.join(folder, img[mood]))
