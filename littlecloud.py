@@ -46,15 +46,15 @@ def handle_littlecloud(userID, line_bot_api):
         line_bot_api.push_message(userID, TemplateSendMessage(
             alt_text='ConfirmTemplate',
             template=ConfirmTemplate(
-                    text='哈囉～你要跟我聊天嗎？還是需要幫助呢？',
+                    text='哈囉～你有什麼問題想要詢問嗎？還是想要了解我們這個小雲朵帳號呢？',
                     actions=[
                         MessageAction(
-                            label='聊天',
-                            text='來聊一聊吧～'
+                            label='我有問題',
+                            text='我有問題'
                         ),
                         MessageAction(
-                            label='幫助',
-                            text='我需要幫助～'
+                            label='小雲朵介紹',
+                            text='小雲朵介紹'
                         )
                     ]
                 )
@@ -65,7 +65,9 @@ def handle_help(tk, line_bot_api):
         line_bot_api.reply_message(tk, text_message)
   
 def handle_chat(tk, line_bot_api):
+        reply_msgs = []
         chat_str = random.choice(chat_list)
-        text_message = TextSendMessage(text=chat_str)
-        line_bot_api.reply_message(tk, text_message)
+        reply_msgs.append(TextSendMessage(text=chat_str))
+        reply_msgs.append(TextSendMessage(text='請留下您的訊息，我們將由專人儘速回覆～\n\n祝福順心！\n小雲朵☁️'))
+        line_bot_api.reply_message(tk, reply_msgs)
   
