@@ -36,9 +36,8 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
     #     mood_scores = pickle.load(f)
 
     today = datetime.date.today()
-    # days = (today - users[userID]).days
-    days = (today - user_date).days
-    # days = (today - dt.strptime(user_date[0], '%Y-%m-%d')).days
+    # days = (today - user_date).days
+    days = 30
 
     # if days in grow_days:
         # mood_scores[userID].append(0)
@@ -63,32 +62,45 @@ def handle_grow(tk, userID, line_bot_api, folder):#, user_filename='users.pkl', 
     print(img_url)
     if img_url:
         reply_msgs = []
-        
-        first_time = read_data('users', 'first_time', userID)[0]
-        if first_time:
-            reply_msgs.append(TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～'))
-            # line_bot_api.reply_message(tk, text_message)
-        else:
-            action_done = read_data('actions', 'plant_done_date', userID)[0]
-            plant_name = read_data('users', 'plant_name', userID)[0]
-            
-            today = datetime.date.today()
-        
-            if action_done != today: 
-                print('""" today not plant done """')
-                modify_val('actions', ['plant_done_date'], [today.strftime('%Y-%m-%d')], userID)
-        
-                reply_msgs.append(TextSendMessage(text=f'🌧️💦💦🌱澆水啦～再等等［{plant_name}］長大吧！'))
-            else:
-                reply_msgs.append(TextSendMessage(text=f'今日份澆水已完成！明天再來幫［{plant_name}］澆水吧～☺️'))
-            
-        # 如果有圖片網址，回傳圖片
-        reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
-        # line_bot_api.reply_message(tk, img_message)
-        os.system(f'rm {img_url[1]}')
 
-        if first_time:
-            reply_msgs.append(TextSendMessage(text='哇！發芽了～\n種子的成長，會隨著每天記錄的心情月亮，產生不同變化，長成屬於你獨一而二的樣貌。\n讓我們一起期待，為你的小生命取個名字吧～\n\n（請輸入「我想取名為［］」。［］中為你想取的名字，若之後想再更換名字，可以同樣輸入此訊息喔～）'))
+        if days >= 30:
+            reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
+            os.system(f'rm {img_url[1]}')
+            
+            plant_name = read_data('users', 'plant_name', userID)[0]
+            reply_msgs.append(TextSendMessage(text=f'我們的旅程已經走到了第 30 天，謝謝你的悉心照料。［{plant_name}］生長完成了！\n能在你的呵護裡，陪你一起走過一段，［{plant_name}］覺得很幸福❤️。'))
+            reply_msgs.append(TextSendMessage(text=f'完成旅程的［{plant_name}］，化作一顆溫柔的星，住進夜空裡守護你。\n謝謝你，是你的堅強和柔軟，讓我們一起走過。'))
+            reply_msgs.append(TextSendMessage(text=f'這段旅程告一段落，我深深地祝福你，一切願望都能成真。\n你可以帶上回憶，離開這裡去往你的人生新篇。\n也可以繼續留下來和我們一起，種下一顆新種子，再度守護種子成長，種成一片屬於你的秘密花園。\n無論你在哪裡，這裡永遠歡迎你。'))
+
+            modify_val('users', ['first_date'], [today.strftime('%Y-%m-%d')], userID)
+            
+        else:
+            first_time = read_data('users', 'first_time', userID)[0]
+            if first_time:
+                reply_msgs.append(TextSendMessage(text='月亮種子的成長，需要我們細緻的照料。\n充足的水分的第一步，讓我們來幫種子澆水吧！\n每天都可以來找我一起澆水，我最擅長澆水了，畢竟我是小雲朵嘛～'))
+                # line_bot_api.reply_message(tk, text_message)
+            else:
+                action_done = read_data('actions', 'plant_done_date', userID)[0]
+                plant_name = read_data('users', 'plant_name', userID)[0]
+                
+                today = datetime.date.today()
+            
+                if action_done != today: 
+                    print('""" today not plant done """')
+                    modify_val('actions', ['plant_done_date'], [today.strftime('%Y-%m-%d')], userID)
+            
+                    reply_msgs.append(TextSendMessage(text=f'🌧️💦💦🌱澆水啦～再等等［{plant_name}］長大吧！'))
+                else:
+                    reply_msgs.append(TextSendMessage(text=f'今日份澆水已完成！明天再來幫［{plant_name}］澆水吧～☺️'))
+                
+            # 如果有圖片網址，回傳圖片
+            reply_msgs.append(ImageSendMessage(original_content_url=img_url[0], preview_image_url=img_url[0]))
+            # line_bot_api.reply_message(tk, img_message)
+            os.system(f'rm {img_url[1]}')
+    
+            if first_time:
+                reply_msgs.append(TextSendMessage(text='哇！發芽了～\n種子的成長，會隨著每天記錄的心情月亮，產生不同變化，長成屬於你獨一而二的樣貌。\n讓我們一起期待，為你的小生命取個名字吧～'))
+                reply_msgs.append(TextSendMessage(text='請輸入：我想取名為［］\n（［］中為你想取的名字，若之後想再更換名字，可以同樣輸入此訊息喔～）'))
         
         line_bot_api.reply_message(tk, reply_msgs)
             
