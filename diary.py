@@ -112,7 +112,7 @@ def save_mood(userID, mood, folder):#, mood_filename='mood_scores.pkl', action_f
     # if action_done[userID] == today:
     #     return
     # else:
-    if action_done is None or action_done != today:
+    if action_done != today:
     # if action_done is None or dt.strptime(action_done[0], '%Y-%m-%d') != today:  
         print('""" today not done """')
         # action_done[userID] = today
